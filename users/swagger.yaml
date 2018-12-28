@@ -1,0 +1,136 @@
+swagger: "2.0"
+info:
+  description: "This is a User api for myCove. You can create and find users"
+  version: "1.0.0"
+  title: "User API"
+  contact:
+    email: "rai.ritesh@gmail.com"
+basePath: "/"
+tags:
+- name: "user"
+  description: "Everything aboutUsers in MyCove"
+
+schemes:
+- "https"
+- "http"
+paths:
+  /users:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+      - "CreateUser"
+      summary: "Add a new user to MyCove"
+      description: "Add a new user to MyCove"
+      operationId: "adduser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+        405:
+          description: "Invalid input"
+    get:
+      tags:
+      - "FindUsers"
+      summary: "Find all the registered users"
+      description: "Find all the registered users"
+      operationId: "findUsers"
+      produces:
+      - "application/json"
+      responses:
+        default:
+          description: "successful operation"
+  /login:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+      - "user login"
+      summary: "Login to MyCove"
+      description: "Login to MyCove"
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/loginRequest"
+      responses:
+        default:
+          description: "successful operation"
+        405:
+          description: "Invalid input"
+
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      alternateEmail:
+        type: "string"
+      primaryPhone:
+        type: "string"
+      workPhone:
+        type: "string"
+      status:
+        type: "string"
+      address:
+        type: "string"
+      addressLine2:
+        type: "string"
+      zipcode:
+        type: "string"
+      state:
+        type: "string"
+      city:
+        type: "string"
+      country:
+        type: "string"
+      additionalContacts:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+          relationship:
+            type: "string"
+          phone:
+            type: "string"
+      properties:
+        type: "object"
+        properties:
+          propertyId:
+            type: "string"
+          role:
+            type: "string"
+          status:
+            type: "string"
+          startDate:
+            type: "string"
+          endDate:
+            type: "string"
+  loginRequest:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
